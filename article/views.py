@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import CreateNewArticle, CreateNewComment
+from django.shortcuts import get_object_or_404
 def index(request):
     return render(request,'index.html', {})
 
@@ -29,7 +30,6 @@ def articleDetailView(request, article_id):
         else:
             form = CreateNewComment()
             data['form'] = form
-    #data['form'] = form
             
     return render(request, 'article/article_detail.html',data)
 
@@ -47,3 +47,10 @@ def articleCreateView(request):
     else:
         form = CreateNewArticle()
     return render(request, 'article/create_article.html',{'form':form})
+
+def articleDeleteView(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    if request.POST:
+        article.delete()
+        return redirect('/')
+    return redirect(request, 'article/article_delete.html', {'article':article})

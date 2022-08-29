@@ -1,0 +1,7 @@
+{% extends 'article_detail.html' %}
+{%% block delete-btn %}
+<form action="{% url 'article_delete' article.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete cat">
+</form>
+{% endblock %}
