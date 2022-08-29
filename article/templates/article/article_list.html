@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Blog List</h1>
+
+    {% if data %}
+    <ul>
+
+    {% for article in queryset %}
+      <li>
+        {{article}}
+      </li>
+    {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>There are no blogs on this site.</p>
+    {% endif %}       
+{% endblock %}
