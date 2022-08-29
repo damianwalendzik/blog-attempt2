@@ -12,4 +12,10 @@
     <li>{{comment.user}}, {{comment.date}}, {{comment.text}}</li>
 {% endfor %}
 
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit", name="save">Comment</button>
+</form>
 {% endblock %}
+

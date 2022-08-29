@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Article, Comment
-from .forms import CreateNewArticle
+from .forms import CreateNewArticle, CreateNewComment
 def index(request):
     return render(request,'index.html', {})
 
@@ -12,12 +12,25 @@ def articleList(request):
     return render(request,'article/article_list.html', data)
 
 def articleDetailView(request, article_id):
-    article_data = Article.objects.get(id=article_id)
-    comment_data = Comment.objects.filter(article=article_id)
-    data = {
-        'queryset': article_data,
-        'comments':comment_data
-    }
+    id=article_id
+    data = {}
+    article_data = Article.objects.get(id=id)
+    comment_data = Comment.objects.filter(article=id)
+    data['queryset'] = article_data
+    data['comments'] = comment_data
+    data['form'] = 0
+    if request.POST:
+        form = CreateNewComment(request.POST)
+        if form.is_valid():
+            new_text = form.cleaned_data["text"]
+            new_comment = Comment(article_id=article_id, user=request.user, text=new_text)
+            new_comment.save()
+            data['form'] = form
+        else:
+            form = CreateNewComment()
+            data['form'] = form
+    #data['form'] = form
+            
     return render(request, 'article/article_detail.html',data)
 
 def articleCreateView(request):

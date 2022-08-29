@@ -6,3 +6,4 @@ urlpatterns = [
         path('article_list/<int:article_id>/', articleDetailView, name='article_detail'),
         path('create_article/', articleCreateView, name='create-article')
     ]
+    
