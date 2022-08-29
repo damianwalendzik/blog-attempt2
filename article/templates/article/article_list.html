@@ -3,12 +3,12 @@
 {% block content %}
     <h1>Blog List</h1>
 
-    {% if data %}
+    {% if queryset %}
     <ul>
 
     {% for article in queryset %}
       <li>
-        {{article}}
+        <a href='{% url "article_detail" article.id %}'>{{ article.title }}</a> ({{article.author}}, {{article.data}})
       </li>
     {% endfor %}
 
