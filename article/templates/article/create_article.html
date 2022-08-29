@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} create blog view {% endblock %}
+{% block content %}
+Create Blog
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit", name="save">Create new article</button>
+</form>
+{% endblock %}
