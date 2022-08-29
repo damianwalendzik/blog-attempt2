@@ -1,1 +1,15 @@
 {% extends 'base.html' %}
+
+{% block content %}
+{{queryset}}
+<h1>Title: {{ queryset.title }}</h1>
+<p><strong>Author:</strong> {{ queryset.author }}</p>
+<p><strong>Date of publication:</strong> {{ queryset.date }}</p> 
+<p><strong>text:</strong> {{ queryset.text }}</p>  
+
+
+{% for comment in comments %}
+    <li>{{comment.user}}, {{comment.date}}, {{comment.text}}</li>
+{% endfor %}
+
+{% endblock %}
