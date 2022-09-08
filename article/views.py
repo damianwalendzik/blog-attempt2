@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import (
     CreateNewArticle, CreateNewComment, DeleteArticle, 
-    UpdateArticle, UpdateComment)
+    DeleteComment, UpdateArticle, UpdateComment)
 from django.shortcuts import get_object_or_404
 def index(request):
     return render(request,'index.html', {})
@@ -85,3 +85,17 @@ def commentUpdateView(request, comment_id, *args, **kwargs):
         form = UpdateComment()
     print(form)
     return render(request, 'article/comment_update.html',{'form':form})
+
+def commentDeleteView(request, comment_id):
+    comment = Comment(id=comment_id)
+    if request.POST:
+        form = DeleteComment(request.POST)
+        if form.is_valid():
+            comment.delete()
+    else:
+        form = DeleteComment()
+    print(form)
+    return render(request, 'article/comment_delete.html',{'form':form})
+
+def deleteMessage(request):
+    return render(request,'article/delete_message.html', {})

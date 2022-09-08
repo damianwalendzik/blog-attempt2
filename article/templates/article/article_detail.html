@@ -9,8 +9,16 @@
 <a href = '{% url "update-article" queryset.id %}'>Update</a>
 
 {% for comment in comments %}
-    <li>{{comment.user}}, {{comment.date}}, {{comment.text}}</li>
-    <a href = '{% url "update-comment" comment.id %}'>Update</a>
+    <li>
+        {{comment.user}}, {{comment.date}}, {{comment.text}} 
+        <a href = '{% url "update-comment" comment.id %}'>
+            Update
+        </a>
+        <a href = '{% url "delete-comment" comment.id %}'>
+            Delete
+        </a>
+    </li>
+
 {% endfor %}
 
 <form method="POST" action="">

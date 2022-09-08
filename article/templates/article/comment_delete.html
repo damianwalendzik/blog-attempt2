@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} delete blog view {% endblock %}
+{% block content %}
+<h1> Are you sure you want to delete this comment?</h1>
+If yes, click proceed button, if not - click <a href ='{% url "article-list" %}'>here</a>
+<form method="POST" action = "">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit", name="save">proceed</button>
+  </form>
+{% endblock %}

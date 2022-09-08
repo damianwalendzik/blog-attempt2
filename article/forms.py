@@ -30,3 +30,6 @@ class UpdateComment(forms.ModelForm):
     class Meta: 
         model = Comment
         fields = ['text']
+
+class Search(forms.Form):
+    pass
