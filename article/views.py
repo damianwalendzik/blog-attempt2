@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
-from .forms import CreateNewArticle, CreateNewComment
+from .forms import CreateNewArticle, CreateNewComment, DeleteArticle
 from django.shortcuts import get_object_or_404
 def index(request):
     return render(request,'index.html', {})
+
 
 
 def articleList(request):
@@ -49,8 +50,15 @@ def articleCreateView(request):
     return render(request, 'article/create_article.html',{'form':form})
 
 def articleDeleteView(request, article_id):
-    article = get_object_or_404(Article, id=article_id)
+    article = Article(id=article_id)
     if request.POST:
-        article.delete()
-        return redirect('/')
-    return redirect(request, 'article/article_delete.html', {'article':article})
+        form = DeleteArticle(request.POST)
+        if form.is_valid():
+            article.delete()
+    else:
+        form = DeleteArticle()
+    print(form)
+    return render(request, 'article/article_delete.html',{'form':form})
+
+def deleteMessage(request):
+    return render(request,'article/delete_message.html', {})

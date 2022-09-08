@@ -9,6 +9,7 @@
     {% for article in queryset %}
       <li>
         <a href='{% url "article_detail" article.id %}'>{{ article.title }}</a> ({{article.author}}, {{article.data}})
+        <a href='{% url "delete-article" article.id %}'>Delete</a>
       </li>
     {% endfor %}
 

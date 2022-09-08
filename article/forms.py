@@ -1,3 +1,4 @@
+
 from django import forms
 from .models import Article, Comment
 class CreateNewArticle(forms.ModelForm):
@@ -9,3 +10,8 @@ class CreateNewComment(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
+
+class DeleteArticle(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = []
