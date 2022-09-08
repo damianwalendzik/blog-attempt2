@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
-from .forms import CreateNewArticle, CreateNewComment, DeleteArticle, UpdateArticle
+from .forms import (
+    CreateNewArticle, CreateNewComment, DeleteArticle, 
+    UpdateArticle, UpdateComment)
 from django.shortcuts import get_object_or_404
 def index(request):
     return render(request,'index.html', {})
@@ -72,3 +74,14 @@ def articleUpdateView(request, article_id):
         form = UpdateArticle()
     print(form)
     return render(request, 'article/article_update.html',{'form':form})
+
+def commentUpdateView(request, comment_id, *args, **kwargs):
+    if request.POST:
+        form = UpdateComment(request.POST)
+        if form.is_valid():
+            new_text = form.cleaned_data["text"]
+            Comment.objects.filter(id=comment_id).update(text=new_text)
+    else:
+        form = UpdateComment()
+    print(form)
+    return render(request, 'article/comment_update.html',{'form':form})
