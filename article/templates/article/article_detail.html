@@ -6,7 +6,7 @@
 <p><strong>Author:</strong> {{ queryset.author }}</p>
 <p><strong>Date of publication:</strong> {{ queryset.date }}</p> 
 <p><strong>text:</strong> {{ queryset.text }}</p>  
-
+<a href = '{% url "update-article" queryset.id %}'>Update</a>
 
 {% for comment in comments %}
     <li>{{comment.user}}, {{comment.date}}, {{comment.text}}</li>
