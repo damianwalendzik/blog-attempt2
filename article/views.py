@@ -4,6 +4,9 @@ from .forms import (
     CreateNewArticle, CreateNewComment, DeleteArticle, 
     DeleteComment, UpdateArticle, UpdateComment)
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ArticleSerializer, CommentSerializer
 def index(request):
     return render(request,'index.html', {})
 
