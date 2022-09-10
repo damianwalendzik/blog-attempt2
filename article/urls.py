@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (articleList, index, articleDetailView, 
     articleCreateView, articleDeleteView, deleteMessage, 
-    articleUpdateView, commentUpdateView, commentDeleteView)
+    articleUpdateView, commentUpdateView, commentDeleteView,
+    searchView)
 
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
         path('delete/delete_message/',deleteMessage, name='delete-message'),
         path('article_list/<int:article_id>/update_article',articleUpdateView, name='update-article'),
         path('update_comment/<int:comment_id>',commentUpdateView, name='update-comment'),
+        path('search', searchView, name = 'search-result')
     ]

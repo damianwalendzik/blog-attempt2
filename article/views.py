@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import (
     CreateNewArticle, CreateNewComment, DeleteArticle, 
-    DeleteComment, UpdateArticle, UpdateComment)
+    DeleteComment, SearchArticle, UpdateArticle, UpdateComment)
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -102,3 +102,11 @@ def commentDeleteView(request, comment_id):
 
 def deleteMessage(request):
     return render(request,'article/delete_message.html', {})
+
+def searchView(request):
+    if request.POST:
+        query = request.POST['searched']
+        qs = Article.objects.filter(title__contains=query)
+        return render(request, 'article/search_results.html', {'query':query,'qs':qs})
+    else:
+        return render(request, 'article/search_results.html', {})

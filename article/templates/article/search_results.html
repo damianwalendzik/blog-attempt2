@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{% if qs %}
+<h1> You searched for {{ query }}</h1>
+    {% for query in qs %}
+    <li>
+        <a href='{% url "article_detail" query.id %}'>{{ query.title }}</a>
+    </li>
+    {% endfor %}
+    {% else %}
+    <h1>you forgot to search</h1>
+{% endif %}
+{% endblock %}
